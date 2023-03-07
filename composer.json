@@ -1,0 +1,33 @@
+{
+    "name": "empaphy/maphematics",
+    "description": "Math library for PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alwin Garside",
+            "email": "alwin@garsi.de",
+            "homepage": "https://yogarine.net/",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.1",
+        "ext-bcmath": "*",
+        "empaphy/polyphill": "^1.0"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "empaphy\\maphematics\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
