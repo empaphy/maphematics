@@ -18,6 +18,7 @@
         "empaphy/polyphill": "^1.0"
     },
     "require-dev": {
+        "pestphp/pest": "^2 || ^3",
         "phpstan/phpstan": "^2"
     },
     "autoload": {
