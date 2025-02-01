@@ -1,0 +1,16 @@
+includes:
+    - phar://phpstan.phar/conf/bleedingEdge.neon
+    - phpstan-baseline.neon
+
+parameters:
+    level: 8
+    paths:
+        - src/
+        - tests/
+    resultCachePath: var/cache/phpstan/resultCache.php
+
+services:
+    cacheStorage:
+        arguments:
+            directory: var/cache/phpstan/cache/PHPStan
+        alteration: true
