@@ -14,13 +14,10 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
-        "ext-bcmath": "*",
-        "empaphy/polyphill": "^1.0",
-        "empaphy/rephine": "^0.1.1"
+        "empaphy/common": "^1.0@dev"
     },
     "require-dev": {
-        "pestphp/pest": "^2 || ^3",
-        "phpstan/phpstan": "^2"
+        "empaphy/dev": "^1.0@dev"
     },
     "autoload": {
         "files": [
