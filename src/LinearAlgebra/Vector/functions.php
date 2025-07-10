@@ -130,9 +130,9 @@ function is_vector(mixed $value): bool
 /**
  * Multiplies each component of a vector with the provided scalar.
  *
- *       ⎡ x ⎤   ⎡ s⋅x ⎤
- *     s·⎢ y ⎥ = ⎢ s⋅y ⎥
- *       ⎣ z ⎦   ⎣ s⋅z ⎦
+ *      ⎡ x ⎤   ⎡ s⋅x ⎤
+ *     s⎢ y ⎥ = ⎢ s⋅y ⎥
+ *      ⎣ z ⎦   ⎣ s⋅z ⎦
  *
  * @param  array<int|float>  $vector
  *   The vector to scale.
@@ -154,9 +154,9 @@ function scale(array $vector, int|float $scalar): array
 /**
  * Performs a linear transformation using matrix-vector multiplication.
  *
- * ⎡ x ⎤   ⎡ a  d  g ⎤    ⎡ a ⎤    ⎡ d ⎤    ⎡ g ⎤   ⎡ xa + yd + zg ⎤
- * ⎢ y ⎥ · ⎢ b  e  h ⎥ = x⎢ b ⎥ + y⎢ e ⎥ + z⎢ h ⎥ = ⎢ xb + ye + zh ⎥
- * ⎣ z ⎦   ⎣ c  f  i ⎦    ⎣ c ⎦    ⎣ f ⎦    ⎣ i ⎦   ⎣ xc + yf + zi ⎦
+ * ⎡ x ⎤⎡ a  d  g ⎤    ⎡ a ⎤    ⎡ d ⎤    ⎡ g ⎤   ⎡ xa + yd + zg ⎤
+ * ⎢ y ⎥⎢ b  e  h ⎥ = x⎢ b ⎥ + y⎢ e ⎥ + z⎢ h ⎥ = ⎢ xb + ye + zh ⎥
+ * ⎣ z ⎦⎣ c  f  i ⎦    ⎣ c ⎦    ⎣ f ⎦    ⎣ i ⎦   ⎣ xc + yf + zi ⎦
  *
  * @param  array<int|float>  $vector
  *   The vector to transform.

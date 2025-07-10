@@ -55,21 +55,45 @@ function is_matrix(mixed $value): bool
 }
 
 /**
+ * Multiply two matrices.
+ *
+ *    A       B
+ * ⎡ a  c ⎤⎡ w  y ⎤   ⎡ wa + xc   ya + zc ⎤
+ * ⎣ b  d ⎦⎣ x  z ⎦ = ⎣ wb + xd   yb + zd ⎦
+ */
+function multiply(array $A, array $B): array
+{
+    $R = [];
+    $Bᵀ = transpose($B);
+
+    foreach ($A as $i => $rowA⟦i⟧) {
+        $R[$i] = array_fill(0, count($B[0]), 0);
+        foreach ($Bᵀ as $j => $colB⟦j⟧) {
+            foreach ($rowA⟦i⟧ as $k => $A⟦i⟧⟦k⟧) {
+                $R[$i][$j] += $A⟦i⟧⟦k⟧ * $colB⟦j⟧[$k];
+            }
+        }
+    }
+
+    return $R;
+}
+
+/**
  * Transpose the given matrix.
  *
- * @param  array<int|float>[]  $matrix
+ * @param  array<int|float>[]  $A
  *   The matrix to transpose.
  *
  * @return array<int|float>[]
  *   Returns a new matrix with the transposed values.
  */
-function transpose(array $matrix): array
+function transpose(array $A): array
 {
     $Aᵀ = [];
 
-    foreach ($matrix as $i => $row) {
-        foreach ($row as $j => $component) {
-            $Aᵀ[$j][$i] = $component;
+    foreach ($A as $i => $rowA⟦i⟧) {
+        foreach ($rowA⟦i⟧ as $j => $A⟦i⟧⟦j⟧) {
+            $Aᵀ[$j][$i] = $A⟦i⟧⟦j⟧;
         }
     }
 
