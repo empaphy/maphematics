@@ -152,7 +152,7 @@ function scale(array $vector, int|float $scalar): array
 }
 
 /**
- * Performs a linear transformation on the given vector using a given matrix.
+ * Performs a linear transformation using matrix-vector multiplication.
  *
  * ⎡ x ⎤   ⎡ a  d  g ⎤    ⎡ a ⎤    ⎡ d ⎤    ⎡ g ⎤   ⎡ xa + yd + zg ⎤
  * ⎢ y ⎥ · ⎢ b  e  h ⎥ = x⎢ b ⎥ + y⎢ e ⎥ + z⎢ h ⎥ = ⎢ xb + ye + zh ⎥
