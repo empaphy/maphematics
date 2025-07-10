@@ -21,8 +21,8 @@
     },
     "autoload": {
         "files": [
-            "src/array.php",
-            "src/vector.php"
+            "src/Array/functions.php",
+            "src/LinearAlgebra/Vector/functions.php"
         ],
         "psr-4": {
             "empaphy\\maphematics\\": "src/"

@@ -4,29 +4,33 @@
  * @author    Alwin Garside <alwin@garsi.de>
  * @copyright 2025 The Empaphy Project
  * @license   MIT
- * @package   Arrays
+ * @package   Array
  */
 
 declare(strict_types=1);
 
-namespace empaphy\maphematics\array;
+namespace empaphy\maphematics\Array;
+
+use RangeException;
+
+use function count;
 
 /**
  * Check that two or more arrays are all the same length.
  *
- * @param  array<mixed>  $array
- * @param  array<mixed>  ...$arrays
+ * @param  array  $array
+ * @param  array  ...$arrays
  * @return int
  *
- * @throws \RangeException
+ * @throws RangeException
  */
 function check_lengths(array $array, array ...$arrays): int
 {
-    $n = \count($array);
+    $n = count($array);
 
     foreach ($arrays as $a) {
-        if (\count($a) !== $n) {
-            throw new \RangeException('Lengths of arrays are not equal');
+        if (count($a) !== $n) {
+            throw new RangeException('Lengths of arrays are not equal');
         }
     }
 
