@@ -8,11 +8,11 @@
 
 declare(strict_types=1);
 
-use empaphy\maphematics\array;
+use empaphy\maphematics\Array;
 
 describe('check_lengths()', function () {
     test('returns appropriate length', function (array $arrays, int $expected) {
-        $length = array\check_lengths(...$arrays);
+        $length = Array\check_lengths(...$arrays);
 
         expect($length)->toBe($expected);
     })->with([
@@ -30,7 +30,7 @@ describe('check_lengths()', function () {
         $this->expectException(\RangeException::class);
         $this->expectExceptionMessage('Lengths of arrays are not equal');
 
-        array\check_lengths(...$arrays);
+        Array\check_lengths(...$arrays);
     })->with([
         [
             [[], [1]],
