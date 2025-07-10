@@ -18,9 +18,9 @@ describe('add()', function () {
         expect($value)->toBe($expected);
     })->with([
         'two vectors' => [
-            [ 3 + 2 , -5 + 1 ],
-            [ 3     , -5     ],
-            [     2 ,      1 ],
+            [ 1 + 3 , 2 + (-1) ],
+            [ 1     , 2        ],
+            [     3 ,      -1  ],
         ],
         'three vectors' => [
             [ 1 + 3 + 7 , 2 + 5 + 11 ],
@@ -89,8 +89,8 @@ describe('scale()', function () {
         expect($value)->toBe($expected);
     })->with([
         'simple scalar' => [
-            [ 3 * 2 , -5 * 2 ],
-            [ 3     , -5     ],
+            [ 2 * 3 , 2 * -5 ],
+            [     3 ,     -5 ],
             2,
         ],
         '3d vector' => [
