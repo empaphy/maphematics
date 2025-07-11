@@ -154,30 +154,31 @@ function scale(array $vector, int|float $scalar): array
 /**
  * Performs a linear transformation using matrix-vector multiplication.
  *
+ *   x       A
  * ⎡ x ⎤⎡ a  d  g ⎤    ⎡ a ⎤    ⎡ d ⎤    ⎡ g ⎤   ⎡ xa + yd + zg ⎤
  * ⎢ y ⎥⎢ b  e  h ⎥ = x⎢ b ⎥ + y⎢ e ⎥ + z⎢ h ⎥ = ⎢ xb + ye + zh ⎥
  * ⎣ z ⎦⎣ c  f  i ⎦    ⎣ c ⎦    ⎣ f ⎦    ⎣ i ⎦   ⎣ xc + yf + zi ⎦
  *
- * @param  array<int|float>  $vector
+ * @param  array<int|float>  $x
  *   The vector to transform.
  *
- * @param  array<int|float>[]  $matrix
+ * @param  array<int|float>[]  $A
  *   The transformation matrix to apply to the vector.
  *
  * @return array<int|float>
  *   The new vector after applying the transformation.
  */
-function transform(array $vector, array $matrix): array
+function transform(array $x, array $A): array
 {
-    if (count($matrix[0]) !== count($vector)) {
+    if (count($A[0]) !== count($x)) {
         throw new RangeException('Vector and matrix column count must match.');
     }
 
-    $v = array_fill(0, count($matrix), 0);
+    $v = array_fill(0, count($A), 0);
 
-    foreach ($matrix as $i => $row) {
+    foreach ($A as $i => $row) {
         foreach ($row as $j => $component) {
-            $v[$i] += $vector[$j] * $component;
+            $v[$i] += $x[$j] * $component;
         }
     }
 
