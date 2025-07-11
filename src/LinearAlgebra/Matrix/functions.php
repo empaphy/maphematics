@@ -64,8 +64,16 @@ function is_matrix(mixed $value): bool
 function multiply(array $A, array $B): array
 {
     $R = [];
-    $Bᵀ = transpose($B);
+    $Bᵀ = [];
+    
+    // Transpose B inline for performance.
+    foreach ($B as $i => $rowB⟦i⟧) {
+        foreach ($rowB⟦i⟧ as $j => $B⟦i⟧⟦j⟧) {
+            $Bᵀ[$j][$i] = $B⟦i⟧⟦j⟧;
+        }
+    }
 
+    // Multiply the matrixes.
     foreach ($A as $i => $rowA⟦i⟧) {
         $R[$i] = array_fill(0, count($B[0]), 0);
         foreach ($Bᵀ as $j => $colB⟦j⟧) {
