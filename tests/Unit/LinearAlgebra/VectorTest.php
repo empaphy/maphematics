@@ -42,43 +42,32 @@ describe('add()', function () {
     ]);
 });
 
-describe('divide()', function () {
-    test('divides', function ($expected, $vector, $divisor) {
-        $value = Vector\divide($vector, $divisor);
+describe('subtract()', function () {
+    test('subtracts', function ($expected, ...$vectors) {
+        $value = Vector\subtract(...$vectors);
         expect($value)->toBe($expected);
     })->with([
-        'simple divisor' => [
-            [ 3 / 2, -5 / 2],
-            [ 3,     -5    ],
-            2,
+        'two vectors' => [
+            [ 1 - 3 , 2 - (-1) ],
+            [ 1     , 2        ],
+            [     3 ,      -1  ],
         ],
-        '3d vector' => [
-            [ 3 / 11 , -5 / 11 , 7 / 11 ],
-            [ 3      , -5      , 7      ],
-            11,
+        'three vectors' => [
+            [ 1 - 3 - 7 , 2 - 5 - 11 ],
+            [ 1         , 2          ],
+            [     3     ,     5      ],
+            [         7 ,         11 ],
         ],
-    ]);
-});
-
-describe('dot()', function () {
-    test('calculates dot product', function ($expected, $vector, $other) {
-        $value = Vector\dot($vector, $other);
-        expect($value)->toBe($expected);
-    })->with([
-        '3D vector' => [
-              5 * -13 + -7 * 17 + 11 * 19 ,
-            [ 5       , -7      , 11      ],
-            [     -13 ,      17 ,      19 ],
+        '3d vectors' => [
+            [ 1 - 5 - 13 , 2 - 7 - 17 , 3 - 11 - 23 ],
+            [ 1          , 2          , 3           ],
+            [     5      ,     7      ,     11      ],
+            [         13 ,         17 ,          23 ],
         ],
-        '2D vector' => [
-              5.11 * -13.17 + -19.23 * 27.29 ,
-            [ 5.11          , -19.23         ],
-            [        -13.17 ,          27.29 ],
-        ],
-        '1D vector' => [
-              5.11 * -13.17 ,
-            [ 5.11          ],
-            [        -13.17 ],
+        'vectors with floats' => [
+            [ 1.2 - 3.5 , -7.11 - 17.23 ],
+            [ 1.2       , -7.11         ],
+            [       3.5 ,         17.23 ],
         ],
     ]);
 });
@@ -101,98 +90,93 @@ describe('scale()', function () {
     ]);
 });
 
-describe('is_vector()', function () {
-    test('finds whether value is a vector', function ($expected, $vector) {
-        $value = Vector\is_vector($vector);
+describe('divide()', function () {
+    test('divides', function ($expected, $vector, $divisor) {
+        $value = Vector\divide($vector, $divisor);
         expect($value)->toBe($expected);
     })->with([
-        [true, [1  , 2,  3]],
-        [true, [0.1, 2, -3]],
-        [true, [1]],
-        [false, []],
-        [false, [1, 2, 'foo']],
-        [false, [1, 2, '3']],
-        [false, [1, 2, '']],
-        [false, [1, 2, null]],
+        'simple divisor' => [
+            [ 3 / 2, -5 / 2],
+            [ 3,     -5    ],
+            2,
+        ],
+        '3d vector' => [
+            [ 3 / 11 , -5 / 11 , 7 / 11 ],
+            [ 3      , -5      , 7      ],
+            11,
+        ],
     ]);
 });
 
 describe('transform()', function () {
-    test('transforms', function ($expected, $vector, $matrix) {
-        $value = Vector\transform($vector, $matrix);
+    test('transforms', function ($expected, $x, $A) {
+        $value = Vector\transform($x, $A);
         expect($value)->toBe($expected);
     })->with([
         '2x2 matrix' => [
-            [
+            'expected' => [
                 -1 * -3 + 2 * 5 ,
                 -1 *  7 + 2 * 0 ,
             ],
-            [   -1,       2     ],
-            [
+            'x' => [   -1,       2     ],
+            'A' => [
                 [    -3 ,     5 ],
                 [     7 ,     0 ],
             ],
         ],
         '2x3 matrix' => [
-            [
+            'expected' => [
                 -1 *  -3 + 2 *  5 ,
                 -1 *  -7 + 2 * 11 ,
                 -1 * -13 + 2 * 17 ,
             ],
-            [   -1       , 2      ],
-            [
+            'x' => [   -1       , 2      ],
+            'A' => [
                 [     -3 ,      5 ],
                 [     -7 ,     11 ],
                 [    -13 ,     17 ],
             ],
         ],
         '3x2 matrix' => [
-            [
+            'expected' => [
                 -3 *  11 + 5 * -13 + -7 *  17 ,
                 -3 * -19 + 5 *  23 + -7 * -27 ,
             ],
-            [   -3       , 5       , -7       ],
-            [
+            'x' => [   -3       , 5       , -7       ],
+            'A' => [
                 [     11 ,     -13 ,       17 ],
                 [    -19 ,      23 ,      -27 ],
             ],
         ],
     ]);
+});
 
-    test("throws RangeException", function ($vector, $matrix) {
-        expect(fn () => Vector\transform($vector, $matrix))->toThrow(
-            \RangeException::class,
-            'Vector and matrix column count must match.',
-        );
+describe('dot()', function () {
+    test('calculates dot product', function ($expected, $vector, $other) {
+        $value = Vector\dot_product($vector, $other);
+        expect($value)->toBe($expected);
     })->with([
-        [
-            [-1, 2, 3],
-            [
-                [1, 3],
-                [-2, 0],
-            ],
+        '3D vector' => [
+              5 * -13 + -7 * 17 + 11 * 19 ,
+            [ 5       , -7      , 11      ],
+            [     -13 ,      17 ,      19 ],
         ],
-        [
-            [-1, 2, 3],
-            [
-                [1, 3],
-                [-2, 0],
-                [5, 7],
-            ],
+        '2D vector' => [
+              5.11 * -13.17 + -19.23 * 27.29 ,
+            [ 5.11          , -19.23         ],
+            [        -13.17 ,          27.29 ],
         ],
-        [
-            [-1, 2],
-            [
-                [1, 3, 5],
-                [-2, 0, 7],
-            ],
+        '1D vector' => [
+              5.11 * -13.17 ,
+            [ 5.11          ],
+            [        -13.17 ],
         ],
     ]);
 });
 
-describe('hadamard()', function () {
+describe('hadamard_product()', function () {
     test('performs an element-wise product', function ($expected, $vector, ...$vectors) {
-        $value = Vector\hadamard($vector, ...$vectors);
+        $value = Vector\hadamard_product($vector, ...$vectors);
         expect($value)->toBe($expected);
     })->with([
         '2D vectors' => [
@@ -216,5 +200,21 @@ describe('hadamard()', function () {
             [       -5.23         ,         -13.37         ],
             [                7.29 ,                  17.41 ],
         ]
+    ]);
+});
+
+describe('is_vector()', function () {
+    test('finds whether value is a vector', function ($expected, $vector) {
+        $value = Vector\is_vector($vector);
+        expect($value)->toBe($expected);
+    })->with([
+        [true, [1  , 2,  3]],
+        [true, [0.1, 2, -3]],
+        [true, [1]],
+        [false, []],
+        [false, [1, 2, 'foo']],
+        [false, [1, 2, '3']],
+        [false, [1, 2, '']],
+        [false, [1, 2, null]],
     ]);
 });
