@@ -21,7 +21,7 @@
     },
     "autoload": {
         "files": [
-            "src/Array/functions.php",
+            "src/Count/functions.php",
             "src/LinearAlgebra/Matrix/functions.php",
             "src/LinearAlgebra/Vector/functions.php"
         ],
