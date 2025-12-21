@@ -1,0 +1,48 @@
+{
+    "name": "empaphy/maphematics",
+    "description": "Math library for PHP",
+    "type": "library",
+    "keywords": ["math", "mathematics", "vector", "matrix", "linear algebra"],
+    "homepage": "https://maphematics.empaphy.org/",
+    "license": "MIT",
+    "authors": [
+        { "name": "Alwin Garside", "email": "alwin@garsi.de" }
+    ],
+    "support": {
+        "issues": "https://github.com/empaphy/maphematics/issues",
+        "source": "https://github.com/empaphy/maphematics",
+        "docs": "https://maphematics.empaphy.org/",
+        "rss": "https://github.com/empaphy/maphematics/releases.atom"
+    },
+    "require": {
+        "php": ">=8.1",
+        "empaphy/usephul": "^1"
+    },
+    "require-dev": {
+        "empaphy/filharmonic": "^1",
+        "empaphy/polyphill-php": "^1.804",
+        "friendsofphp/php-cs-fixer": "^3",
+        "pestphp/pest": "^4 || ^3 || ^2",
+        "phpstan/phpstan": "^2",
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "empaphy\\maphematics\\": "src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "stan": "vendor/bin/phpstan",
+        "test": "vendor/bin/pest"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "1.x-dev"
+        }
+    }
+}

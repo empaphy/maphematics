@@ -1,0 +1,13 @@
+/.idea
+/.phpdoc
+/build
+/var
+/vendor
+
+/composer.lock
+
+.DS_Store
+.git
+Thumbs.db
+compose.override.yaml
+docker-compose.override.yaml
