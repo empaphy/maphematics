@@ -27,6 +27,9 @@
         "roave/security-advisories": "dev-latest"
     },
     "autoload": {
+        "files": [
+            "src/Foundations/Sets/functions.php"
+        ],
         "psr-4": {
             "empaphy\\maphematics\\": "src/"
         }
