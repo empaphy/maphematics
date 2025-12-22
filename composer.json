@@ -28,6 +28,8 @@
     },
     "autoload": {
         "files": [
+            "src/Algebra/Linear/Matrix/functions.php",
+            "src/Algebra/Linear/Vector/functions.php",
             "src/Foundations/Sets/functions.php"
         ],
         "psr-4": {
