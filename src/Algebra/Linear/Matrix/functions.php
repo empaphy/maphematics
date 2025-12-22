@@ -83,3 +83,83 @@ function is_matrix(mixed $value, mixed ...$values): bool
 
     return true;
 }
+
+/**
+ * Multiply two matrices.
+ *
+ * The number of columns in __A__ must be equal to the number of rows in __B__.
+ *
+ *            A          B
+ *     ⎛ -1  -2  -3 ⎞⎛ 1  4 ⎞   ⎛ -1⋅1 + -2⋅2 + -3⋅3   -1⋅4 + -2⋅5 + -3⋅6 ⎞
+ *     ⎝ -4  -5  -6 ⎠⎜ 2  5 ⎟ = ⎝ -4⋅1 + -5⋅2 + -6⋅3   -4⋅4 + -5⋅5 + -6⋅6 ⎠
+ *                   ⎝ 3  6 ⎠
+ *
+ *          A         B
+ *     ⎛ -1  -2 ⎞⎛ 1  3  5 ⎞   ⎛ -1⋅1 + -2⋅2   -1⋅3 + -2⋅4   -1⋅5 + -2⋅6 ⎞
+ *     ⎜ -3  -4 ⎟⎝ 2  4  6 ⎠ = ⎜ -3⋅1 + -4⋅2   -3⋅3 + -4⋅4   -3⋅5 + -4⋅6 ⎟
+ *     ⎝ -5  -6 ⎠              ⎝ -5⋅1 + -6⋅2   -5⋅3 + -6⋅4   -5⋅5 + -6⋅6 ⎠
+ *
+ * @param  list<list<int|float>>  $A
+ *   A matrix.
+ *
+ * @param  list<list<int|float>>  $B
+ *   Another matrix. The number of rows in _B_ has to match the number of
+ *   columns in _A_. In other words, if _A_ is an `m × n` matrix, then _B_
+ *   must be `n × p`.
+ *
+ * @param  list<list<int|float>>  ...$…
+ *   Additional matrices. The number of rows of each of these has to match
+ *   the number of columns in the previous argument.
+ *
+ * @return list<list<int|float>>
+ *   Returns the product of matrices __A__ and __B__. The resulting matrix
+ *   has the same number of rows as __A__, and the same number of columns as
+ *   __B__.
+ */
+function multiply(array $A, array $B, array ...$…): array
+{
+    assert(
+        is_matrix($A),
+        __FUNCTION__ . '(): Argument #1 ($A) must be a matrix'
+    );
+
+    $R = $A;
+    $pos = 1;
+    foreach ([$B, ...$…] as $key => $M) {
+        $pos++;
+        assert(
+            is_matrix($M),
+            __FUNCTION__ . '(): Argument #%d ($%s) must be a matrix',
+        );
+        assert(
+            count($R[0]) === count($M),
+            __FUNCTION__ . "(): The row count of argument #$pos (\$$key) must "
+                . 'match the column count of the previous argument',
+        );
+
+        // Transpose B (inline for performance).
+        $Mᵀ = [];
+        foreach ($M as $i => $rowB⟦i⟧) {
+            foreach ($rowB⟦i⟧ as $j => $M⟦i⟧⟦j⟧) {
+                $Mᵀ[$j][$i] = $M⟦i⟧⟦j⟧;
+            }
+        }
+
+        $p = count($Mᵀ);
+        $L = $R;
+        /** @var list<list<int|float>> $R */
+        $R = [];
+
+        // Multiply the matrices.
+        foreach ($L as $i => $rowA⟦i⟧) {
+            $R[$i] = array_fill(0, $p, 0);
+            foreach ($Mᵀ as $j => $colM⟦j⟧) {
+                foreach ($rowA⟦i⟧ as $k => $K⟦i⟧⟦k⟧) {
+                    $R[$i][$j] += $K⟦i⟧⟦k⟧ * $colM⟦j⟧[$k];
+                }
+            }
+        }
+    }
+
+    return $R;
+}
