@@ -28,6 +28,7 @@ use function count;
 use function is_array;
 use function is_float;
 use function is_int;
+use function sqrt;
 
 /**
  * Add two or more vectors together.
@@ -71,6 +72,32 @@ function add(array $v, array $w, array ...$…): array
     }
 
     return $v;
+}
+
+/**
+ * Calculates the length of the given vector.
+ *
+ *     ‖v‖ = √(v₁² + v₂² + v₃²)
+ *
+ * @param  list<int|float>  $v
+ *   The vector for which to calculate the length.
+ *
+ * @return float
+ *   Returns the length of the given vector __v__.
+ */
+function length(array $v): float
+{
+    assert(
+        is_vector($v),
+        __FUNCTION__ . '(): Argument #1 ($v) must be a vector',
+    );
+
+    $‖v‖ = 0;
+    foreach ($v as $c) {
+        $‖v‖ += $c ** 2;
+    }
+
+    return sqrt($‖v‖);
 }
 
 /**
